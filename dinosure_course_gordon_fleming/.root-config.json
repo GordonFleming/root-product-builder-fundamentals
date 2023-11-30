@@ -40,8 +40,9 @@
     "canRequote": false,
     "gracePeriod": {
       "lapseOn": {
+        "afterFirstMissedPayment": null,
         "consecutiveMissedPayments": {
-        	"number": 2
+          "number": 2
         },
         "missedPaymentsOverPolicyTerm": null,
         "missedPaymentsWithinPeriod": null
@@ -50,7 +51,11 @@
         "lapsePolicyWithProcessingPayment": false
       }
     },
-    "waitingPeriod": null,
+    "waitingPeriod": {
+      "applyTo": {
+        "theFullPolicy": null
+      }
+    },
     "coolingOffPeriod": {
       "applyTo": {
         "theFullPolicy": {
