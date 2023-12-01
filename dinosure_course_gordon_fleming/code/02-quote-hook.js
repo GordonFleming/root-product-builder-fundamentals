@@ -14,9 +14,8 @@ const validateQuoteRequest = (data) => {
       .keys({
         // The policy start date must be provided, and it must fall within the next 60 days from quote creation.
         start_date: Joi.date()
-          .min(moment())
-          .max(moment().add(60, 'days'))
-          .format()
+          .min(moment().toDate())
+          .max(moment().add(60, 'days').toDate())
           .required(),
         // The cover amount (sum insured) must be provided, and it must fall between R10,000.00 and R100,000.00 inclusive.
         cover_amount: Joi.number()
@@ -28,7 +27,6 @@ const validateQuoteRequest = (data) => {
         birth_date: Joi.date()
           .min(moment().subtract(50, 'years').toDate())
           .max(moment().toDate())
-          .format()
           .required(),
         // The dinosaur species must be one of the following [Tyrannosaurus Rex, Stegosaurus, Velociraptor, Diplodocus, Iguanodon].
         species: Joi.string()
@@ -41,7 +39,7 @@ const validateQuoteRequest = (data) => {
           )
           .required(),
         // The policyholder must indicate whether the dinosaur’s health checks are up to date.
-        health_check_updated: Joi.boolean().required(),
+        health_checks_updated: Joi.boolean().required(),
       })
       .required(),
     { abortEarly: false },
@@ -61,12 +59,12 @@ const getQuote = (data) => {
     // Below are standard fields for all products
     package_name: 'DinoSure Protection', // The name of the "package" of cover
     sum_assured: data.cover_amount, // Set the total, aggregated cover amount
-    base_premium: basePremiumCalc(data), // Should be an integer, cents
-    suggested_premium: basePremiumCalc(data), // Should be an integer, cents
+    base_premium: corePremiumCalc(data), // Should be an integer, cents
+    suggested_premium: corePremiumCalc(data), // Should be an integer, cents
     billing_frequency: 'monthly', // Can be monthly or yearly
     module: {
       // Save any data, calculations, or results here for future re-use.
-      base_premium: basePremiumCalc(data),
+      type: 'dinosure_course_gordon_fleming',
       ...data,
     },
     input_data: { ...data },
