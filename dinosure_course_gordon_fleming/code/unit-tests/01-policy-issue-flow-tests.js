@@ -26,7 +26,7 @@ describe('Policy issue flow', function () {
     });
 
     // Test invalid object
-    it('valid data should pass validation', function () {
+    it('invalid data should not pass validation', function () {
       const validationResult = validateQuoteRequest(invalidQuoteData);
       expect(validationResult.error).to.not.equal(null);
     });
