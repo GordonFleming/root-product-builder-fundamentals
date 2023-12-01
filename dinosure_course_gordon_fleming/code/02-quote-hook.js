@@ -66,6 +66,7 @@ const getQuote = (data) => {
     billing_frequency: 'monthly', // Can be monthly or yearly
     module: {
       // Save any data, calculations, or results here for future re-use.
+      base_premium: basePremiumCalc(data),
       ...data,
     },
     input_data: { ...data },
