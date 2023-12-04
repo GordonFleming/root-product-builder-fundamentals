@@ -27,9 +27,8 @@ function corePremiumCalc(data) {
   }
 
   if (data.health_checks_updated === false) {
-    corePremium += 250 * 100;
+    corePremium += 250;
   }
 
-  const core_premium_cents = corePremium * 100;
-  return core_premium_cents;
+  return corePremium;
 }
