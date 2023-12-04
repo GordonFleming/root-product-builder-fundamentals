@@ -28,22 +28,24 @@ describe('Policy issue flow', function () {
     // Test invalid object
     it('invalid data should not pass validation', function () {
       const validationResult = validateQuoteRequest(invalidQuoteData);
+
+      console.log(JSON.stringify(validationResult, null, 2));
       expect(validationResult.error).to.not.equal(null);
     });
 
     it('A 20-year-old Tyrannosaurus Rex with R90,000.00 has a premium of R1458.00', function () {
       const quotePackage = getQuote(trexQuoteData)[0];
-      expect(quotePackage.base_premium).to.equal(1458);
+      expect(quotePackage.base_premium).to.equal(145800);
     });
 
     it('A 36-year-old Velociraptor with R50,000.00 has a premium of R1368.00', function () {
       const quotePackage = getQuote(vraptorQuoteData)[0];
-      expect(quotePackage.base_premium).to.equal(1368);
+      expect(quotePackage.base_premium).to.equal(136800);
     });
 
     it('A 16-year-old Brachiosaurus with R65,000.00 has a premium of R1372.80', function () {
       const quotePackage = getQuote(brachQuoteData)[0];
-      expect(quotePackage.base_premium).to.equal(1372.8);
+      expect(quotePackage.base_premium).to.equal(137280);
     });
   });
 
