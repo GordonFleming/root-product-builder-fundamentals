@@ -15,7 +15,16 @@ const validateApplicationRequest = (data, policyholder, quote_package) => {
     data,
     Joi.object()
       .keys({
-        // keys and validation
+        // The name of the dinosaur needs to be provided and must be less than 100 characters.
+        dinosaur_name: Joi.string().max(100).required(),
+        // The colour of the dinosaur needs to be provided and must be one of the following [Lilac, Sea green, Granite grey, Midnight blue]
+        dinosaur_colour: Joi.string()
+          .valid('Lilac', 'Sea green', 'Granite grey', 'Midnight blue')
+          .required(),
+        // The dinosaur’s National Dinosaur Registry Number (NDRN) must be provided and should be a number between 100,000 and 999,999.
+        ndrn: Joi.string()
+          .regex(/^[1-9][0-9]{5}$/)
+          .required(),
       })
       .required(),
     { abortEarly: false },
