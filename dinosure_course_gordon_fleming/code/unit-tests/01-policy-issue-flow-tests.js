@@ -33,17 +33,17 @@ describe('Policy issue flow', function () {
 
     it('A 20-year-old Tyrannosaurus Rex with R90,000.00 has a premium of R1458.00', function () {
       const quotePackage = getQuote(trexQuoteData)[0];
-      expect(quotePackage.base_premium).to.equal(1458 * 100); // cents
+      expect(quotePackage.base_premium).to.equal(1458);
     });
 
     it('A 36-year-old Velociraptor with R50,000.00 has a premium of R1368.00', function () {
       const quotePackage = getQuote(vraptorQuoteData)[0];
-      expect(quotePackage.base_premium).to.equal(1368 * 100); // cents
+      expect(quotePackage.base_premium).to.equal(1368);
     });
 
     it('A 16-year-old Brachiosaurus with R65,000.00 has a premium of R1372.80', function () {
       const quotePackage = getQuote(brachQuoteData)[0];
-      expect(quotePackage.base_premium).to.equal(1372.8 * 100); // cents
+      expect(quotePackage.base_premium).to.equal(1372.8);
     });
   });
 
