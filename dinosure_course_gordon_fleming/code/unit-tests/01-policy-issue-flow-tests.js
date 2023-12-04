@@ -10,7 +10,7 @@ describe('Policy issue flow', function () {
   before(function () {
     quotePackage = getQuote(validQuoteData);
     applicationPackage = getApplication(
-      applicationData,
+      validApplicationData,
       undefined,
       // @ts-ignore
       quotePackage,
@@ -48,25 +48,37 @@ describe('Policy issue flow', function () {
   });
 
   // Application hook
-  //   describe('Application hook', function () {
-  //     it('should pass application data validation ', function () {
-  //       const validationResult = validateApplicationRequest(
-  //         applicationData,
-  //         undefined,
-  //         undefined,
-  //       );
-  //       expect(validationResult.error).to.equal(null);
-  //     });
-  //     it('should return the correct module data', function () {
-  //       expect(applicationPackage.module.SOME_PROPERTY).to.equal(
-  //         '<SOME_PROPERTY>',
-  //       );
-  //     });
-  //   });
+  describe('Application hook', function () {
+    it('should pass application data validation ', function () {
+      const validationResult = validateApplicationRequest(
+        validApplicationData,
+        undefined,
+        undefined,
+      );
+      expect(validationResult.error).to.equal(null);
+    });
+
+    it('should not pass application data validation ', function () {
+      const validationResult = validateApplicationRequest(
+        invalidApplicationData,
+        undefined,
+        undefined,
+      );
+      expect(validationResult.error).to.not.equal(null);
+    });
+
+    // TODO:
+
+    // it('A created application has all of the data from the quote and application step', function () {
+    //   expect(applicationPackage.module.SOME_PROPERTY).to.equal(
+    //     '<SOME_PROPERTY>',
+    //   );
+    // });
+  });
 
   // Policy issue hook
   //   describe('Policy issue hook', function () {
-  //     it('should create a policy with the correct parameters', function () {
+  //     it('A created policy has all of the data from the quote and application step', function () {
   //       const policy = getPolicy(applicationPackage, undefined, undefined);
   //       expect(policy.package_name).to.equal('<CORRECT PACKAGE NAME>');
   //       expect(policy.monthly_premium).to.equal(1234);

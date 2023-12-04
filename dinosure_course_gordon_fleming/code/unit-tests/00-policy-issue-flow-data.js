@@ -49,7 +49,17 @@ const brachQuoteData = {
   health_checks_updated: true,
 };
 
-// Example application data
-const applicationData = {
-  // app-data
+// Example valid application data
+const validApplicationData = {
+  dinosaur_name: 'Dino',
+  dinosaur_colour: 'Lilac',
+  ndrn: '123456',
+};
+
+// Example invalid application data
+const invalidApplicationData = {
+  dinosaur_name:
+    'Dinoooooooooooooooooooosssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
+  dinosaur_colour: 'Orange',
+  ndrn: '05405',
 };
