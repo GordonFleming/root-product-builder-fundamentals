@@ -28,8 +28,6 @@ describe('Policy issue flow', function () {
     // Test invalid object
     it('invalid data should not pass validation', function () {
       const validationResult = validateQuoteRequest(invalidQuoteData);
-
-      console.log(JSON.stringify(validationResult, null, 2));
       expect(validationResult.error).to.not.equal(null);
     });
 
@@ -85,12 +83,19 @@ describe('Policy issue flow', function () {
   });
 
   // Policy issue hook
-  //   describe('Policy issue hook', function () {
-  //     it('A created policy has all of the data from the quote and application step', function () {
-  //       const policy = getPolicy(applicationPackage, undefined, undefined);
-  //       expect(policy.package_name).to.equal('<CORRECT PACKAGE NAME>');
-  //       expect(policy.monthly_premium).to.equal(1234);
-  //       expect(policy.sum_assured).to.equal(12345678);
-  //     });
-  //   });
+  describe('Policy issue hook', function () {
+    it('A created policy has all of the data from the quote and application step', function () {
+      const policy = getPolicy(applicationPackage, undefined, undefined);
+
+      // Test quote data exists
+      expect(policy.package_name).to.equal('DinoSure Protection');
+      expect(policy.monthly_premium).to.equal(155520);
+      expect(policy.sum_assured).to.equal(9600000);
+
+      // Test application data exists
+      expect(policy.module.dinosaur_name).to.equal('Dino');
+      expect(policy.module.dinosaur_colour).to.equal('Lilac');
+      expect(policy.module.ndrn).to.equal('123456');
+    });
+  });
 });
