@@ -27,7 +27,7 @@ function corePremiumCalc(data) {
   }
 
   if (data.health_checks_updated === false) {
-    corePremium += 250;
+    corePremium += 25000;
   }
 
   return corePremium;
