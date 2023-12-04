@@ -30,5 +30,5 @@ function corePremiumCalc(data) {
     corePremium += 25000;
   }
 
-  return corePremium;
+  return Math.round(corePremium);
 }
