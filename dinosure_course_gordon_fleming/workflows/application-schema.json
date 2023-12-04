@@ -14,9 +14,27 @@
   },
   {
     "key": "dinosaur_colour",
-    "type": "text",
+    "type": "select",
     "label": "Dinosaur Colour *",
     "outputPath": "dinosaur_colour",
+    "options": [
+      {
+        "label": "Lilac",
+        "value": "Lilac"
+      },
+      {
+        "label": "Sea green",
+        "value": "Sea green"
+      },
+      {
+        "label": "Granite grey",
+        "value": "Granite grey"
+      },
+      {
+        "label": "Midnight blue",
+        "value": "Midnight blue"
+      }
+    ],
     "validators": [
       {
         "validation": {

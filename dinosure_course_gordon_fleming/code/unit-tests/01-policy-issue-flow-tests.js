@@ -70,9 +70,12 @@ describe('Policy issue flow', function () {
     // TODO:
 
     // it('A created application has all of the data from the quote and application step', function () {
-    //   expect(applicationPackage.module.SOME_PROPERTY).to.equal(
-    //     '<SOME_PROPERTY>',
+    //   const application = getApplication(
+    //     validApplicationData,
+    //     undefined,
+    //     quotePackage,
     //   );
+    //   expect(application.module.quote_package).to.exist;
     // });
   });
 
