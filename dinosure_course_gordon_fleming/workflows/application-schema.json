@@ -1,9 +1,9 @@
 [
   {
-    "key": "pet_name",
+    "key": "dinosaur_name",
     "type": "text",
-    "label": "Pet name *",
-    "outputPath": "pet_name",
+    "label": "Dinosaur Name *",
+    "outputPath": "dinosaur_name",
     "validators": [
       {
         "validation": {
@@ -13,10 +13,10 @@
     ]
   },
   {
-    "key": "pet_breed",
+    "key": "dinosaur_colour",
     "type": "text",
-    "label": "Pet breed *",
-    "outputPath": "pet_breed",
+    "label": "Dinosaur Colour *",
+    "outputPath": "dinosaur_colour",
     "validators": [
       {
         "validation": {
@@ -26,33 +26,10 @@
     ]
   },
   {
-    "key": "pet_colour",
+    "key": "ndrn",
     "type": "text",
-    "label": "Pet colour *",
-    "outputPath": "pet_colour",
-    "validators": [
-      {
-        "validation": {
-          "type": "required"
-        }
-      }
-    ]
-  },
-  {
-    "key": "pet_gender",
-    "type": "select",
-    "label": "Pet gender *",
-    "options": [
-      {
-        "label": "Male",
-        "value": "male"
-      },
-      {
-        "label": "Female",
-        "value": "female"
-      }
-    ],
-    "outputPath": "pet_gender",
+    "label": "National Dinosaur Registry Number (NDRN) *",
+    "outputPath": "ndrn",
     "validators": [
       {
         "validation": {
