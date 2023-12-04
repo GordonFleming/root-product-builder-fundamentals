@@ -67,16 +67,19 @@ describe('Policy issue flow', function () {
       expect(validationResult.error).to.not.equal(null);
     });
 
-    // TODO:
+    it('A created application has all of the data from the quote and application step', function () {
+      // Test quote data exists
+      expect(applicationPackage.module.start_date).to.exist;
+      expect(applicationPackage.module.cover_amount).to.exist;
+      expect(applicationPackage.module.birth_date).to.exist;
+      expect(applicationPackage.module.species).to.exist;
+      expect(applicationPackage.module.health_checks_updated).to.exist;
 
-    // it('A created application has all of the data from the quote and application step', function () {
-    //   const application = getApplication(
-    //     validApplicationData,
-    //     undefined,
-    //     quotePackage,
-    //   );
-    //   expect(application.module.quote_package).to.exist;
-    // });
+      // Test application data exists
+      expect(applicationPackage.module.dinosaur_name).to.exist;
+      expect(applicationPackage.module.dinosaur_colour).to.exist;
+      expect(applicationPackage.module.ndrn).to.exist;
+    });
   });
 
   // Policy issue hook

@@ -51,7 +51,7 @@ const getApplication = (data, policyholder, quote_package) => {
     input_data: { ...data },
     module: {
       // The module object is used to store product-specific fields
-      ...quote_package.module,
+      ...quote_package[0].module,
       ...data,
     },
   });
