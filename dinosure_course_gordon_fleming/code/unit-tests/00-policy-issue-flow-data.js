@@ -25,7 +25,7 @@ const invalidQuoteData = {
 // A 20-year-old Tyrannosaurus Rex with R90,000.00 has a premium of R1458.00
 const trexQuoteData = {
   start_date: moment().add(7, 'days'),
-  cover_amount: 90000,
+  cover_amount: 9000000,
   birth_date: moment().subtract(20, 'years'),
   species: 'Tyrannosaurus Rex',
   health_checks_updated: true,
@@ -34,7 +34,7 @@ const trexQuoteData = {
 // A 36-year-old Velociraptor with R50,000.00 has a premium of R1368.00
 const vraptorQuoteData = {
   start_date: moment().add(7, 'days'),
-  cover_amount: 50000,
+  cover_amount: 5000000,
   birth_date: moment().subtract(36, 'years'),
   species: 'Velociraptor',
   health_checks_updated: true,
@@ -43,7 +43,7 @@ const vraptorQuoteData = {
 // A 16-year-old Brachiosaurus with R65,000.00 has a premium of R1372.80
 const brachQuoteData = {
   start_date: moment().add(7, 'days'),
-  cover_amount: 65000,
+  cover_amount: 6500000,
   birth_date: moment().subtract(16, 'years'),
   species: 'Brachiosaurus',
   health_checks_updated: true,
