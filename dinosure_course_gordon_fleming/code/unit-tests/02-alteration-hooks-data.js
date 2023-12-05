@@ -3,14 +3,15 @@
 // This file automatically get's commented out by the CLI tool when being pushed to Root.
 // This ensures that it does not interfere with production execution.
 
+// valid data for alteration
 const validAlterationData = {
-  // valid data for alteration
+  cover_amount: 9600000,
 };
 
+// invalid data for alteration
 const invalidAlterationData = {
-  // invalid data for alteration
+  cover_amount: 960,
 };
 
-const examplePolicy = {
-  // copy policy object here
-};
+// copy policy object here
+const examplePolicy = {};
