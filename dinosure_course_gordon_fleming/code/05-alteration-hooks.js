@@ -54,12 +54,16 @@ const validateAlterationPackageRequest = ({
  */
 const getAlteration = ({ alteration_hook_key, data, policy, policyholder }) => {
   let alterationPackage;
+
+  // update policy to have new cover amount
+  policy.module.cover_amount = data.cover_amount;
+
   switch (alteration_hook_key) {
     case 'update-cover':
       alterationPackage = new AlterationPackage({
         input_data: data,
         sum_assured: data.cover_amount,
-        monthly_premium: corePremiumCalc(data),
+        monthly_premium: corePremiumCalc(policy.module),
         change_description: 'Alteration - cover amount updated',
         module: {
           ...policy.module,
