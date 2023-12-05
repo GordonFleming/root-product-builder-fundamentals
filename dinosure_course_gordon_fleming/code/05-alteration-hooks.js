@@ -19,11 +19,16 @@ const validateAlterationPackageRequest = ({
 }) => {
   let validationResult;
   switch (alteration_hook_key) {
-    case 'KEY':
+    case 'update_cover':
       validationResult = Joi.validate(
         data,
         Joi.object()
           .keys({
+            cover_amount: Joi.number()
+              .integer()
+              .min(10000 * 100)
+              .max(100000 * 100)
+              .required(),
             // keys and validation
           })
           .required(),
