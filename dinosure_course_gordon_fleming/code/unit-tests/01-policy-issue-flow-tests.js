@@ -13,7 +13,7 @@ describe('Policy issue flow', function () {
       validApplicationData,
       undefined,
       // @ts-ignore
-      quotePackage,
+      quotePackage[0],
     );
   });
 
