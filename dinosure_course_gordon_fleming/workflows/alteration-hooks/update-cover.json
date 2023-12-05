@@ -1,0 +1,17 @@
+[
+  {
+    "key": "cover_amount",
+    "type": "currency",
+    "label": "Cover Amount *",
+    "props": {
+      "prefix": "R"
+    },
+    "validators": [
+      {
+        "validation": {
+          "type": "required"
+        }
+      }
+    ]
+  }
+]

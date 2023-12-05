@@ -137,7 +137,7 @@
   },
   "alterationHooks": [
     {
-      "key": "update_cover",
+      "key": "update-cover",
       "name": "Update Cover Amount"
     }
   ],
