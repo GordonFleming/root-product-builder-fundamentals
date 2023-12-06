@@ -37,8 +37,10 @@ describe('Amendment alteration hook', function () {
 
     const alteredPolicy = applyAlteration({
       alteration_hook_key: alterationHookKey,
+      // @ts-ignore
       policy: trexExamplePolicy,
       policyholder: undefined,
+      // @ts-ignore
       alteration_package: alterationPackage,
     });
 
@@ -57,8 +59,10 @@ describe('Amendment alteration hook', function () {
 
     const alteredPolicy = applyAlteration({
       alteration_hook_key: alterationHookKey,
+      // @ts-ignore
       policy: vraptorExamplePolicy,
       policyholder: undefined,
+      // @ts-ignore
       alteration_package: alterationPackage,
     });
 
