@@ -10,10 +10,10 @@ describe('Policy issue flow', function () {
   before(function () {
     quotePackage = getQuote(validQuoteData);
     applicationPackage = getApplication(
-      applicationData,
+      validApplicationData,
       undefined,
       // @ts-ignore
-      quotePackage,
+      quotePackage[0],
     );
   });
 
@@ -28,8 +28,6 @@ describe('Policy issue flow', function () {
     // Test invalid object
     it('invalid data should not pass validation', function () {
       const validationResult = validateQuoteRequest(invalidQuoteData);
-
-      console.log(JSON.stringify(validationResult, null, 2));
       expect(validationResult.error).to.not.equal(null);
     });
 
@@ -50,29 +48,54 @@ describe('Policy issue flow', function () {
   });
 
   // Application hook
-  //   describe('Application hook', function () {
-  //     it('should pass application data validation ', function () {
-  //       const validationResult = validateApplicationRequest(
-  //         applicationData,
-  //         undefined,
-  //         undefined,
-  //       );
-  //       expect(validationResult.error).to.equal(null);
-  //     });
-  //     it('should return the correct module data', function () {
-  //       expect(applicationPackage.module.SOME_PROPERTY).to.equal(
-  //         '<SOME_PROPERTY>',
-  //       );
-  //     });
-  //   });
+  describe('Application hook', function () {
+    it('should pass application data validation ', function () {
+      const validationResult = validateApplicationRequest(
+        validApplicationData,
+        undefined,
+        undefined,
+      );
+      expect(validationResult.error).to.equal(null);
+    });
+
+    it('should not pass application data validation ', function () {
+      const validationResult = validateApplicationRequest(
+        invalidApplicationData,
+        undefined,
+        undefined,
+      );
+      expect(validationResult.error).to.not.equal(null);
+    });
+
+    it('A created application has all of the data from the quote and application step', function () {
+      // Test quote data exists
+      expect(applicationPackage.module.start_date).to.exist;
+      expect(applicationPackage.module.cover_amount).to.exist;
+      expect(applicationPackage.module.birth_date).to.exist;
+      expect(applicationPackage.module.species).to.exist;
+      expect(applicationPackage.module.health_checks_updated).to.exist;
+
+      // Test application data exists
+      expect(applicationPackage.module.dinosaur_name).to.exist;
+      expect(applicationPackage.module.dinosaur_colour).to.exist;
+      expect(applicationPackage.module.ndrn).to.exist;
+    });
+  });
 
   // Policy issue hook
-  //   describe('Policy issue hook', function () {
-  //     it('should create a policy with the correct parameters', function () {
-  //       const policy = getPolicy(applicationPackage, undefined, undefined);
-  //       expect(policy.package_name).to.equal('<CORRECT PACKAGE NAME>');
-  //       expect(policy.monthly_premium).to.equal(1234);
-  //       expect(policy.sum_assured).to.equal(12345678);
-  //     });
-  //   });
+  describe('Policy issue hook', function () {
+    it('A created policy has all of the data from the quote and application step', function () {
+      const policy = getPolicy(applicationPackage, undefined, undefined);
+
+      // Test quote data exists
+      expect(policy.package_name).to.equal('DinoSure Protection');
+      expect(policy.monthly_premium).to.equal(155520);
+      expect(policy.sum_assured).to.equal(9600000);
+
+      // Test application data exists
+      expect(policy.module.dinosaur_name).to.equal('Dino');
+      expect(policy.module.dinosaur_colour).to.equal('Lilac');
+      expect(policy.module.ndrn).to.equal('123456');
+    });
+  });
 });
