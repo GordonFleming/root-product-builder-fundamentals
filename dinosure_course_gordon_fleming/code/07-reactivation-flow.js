@@ -48,12 +48,12 @@ const beforePolicyReactivated = ({
 
   // Queue actions to be executed after policy is reactivated
   return [
-    { name: 'activate_policy' },
     {
       name: 'update_policy',
       data: {
         module: newModule,
       },
     },
+    // { name: 'activate_policy' },
   ];
 };
