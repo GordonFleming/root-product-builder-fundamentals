@@ -135,7 +135,12 @@
       }
     }
   },
-  "alterationHooks": [],
+  "alterationHooks": [
+    {
+      "key": "update-cover",
+      "name": "Update Cover Amount"
+    }
+  ],
   "scheduledFunctions": [],
   "fulfillmentTypes": [
     {

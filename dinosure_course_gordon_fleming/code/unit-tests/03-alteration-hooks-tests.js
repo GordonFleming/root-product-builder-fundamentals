@@ -3,39 +3,66 @@
 // This file automatically get's commented out by the CLI tool when being pushed to Root.
 // This ensures that it does not interfere with production execution.
 
-// describe('Amendment alteration hook', function () {
-//   const alterationHookKey = '<ALTERATION HOOK KEY>';
+describe('Amendment alteration hook', function () {
+  const alterationHookKey = 'update-cover';
 
-//   it('valid data should pass validation', function () {
-//     const validationResult = validateAlterationPackageRequest({
-//       alteration_hook_key: alterationHookKey,
-//       data: validAlterationData,
-//       policy: undefined,
-//       policyholder: undefined,
-//     });
-//     expect(validationResult.error).to.equal(null);
-//   });
+  it('valid data should pass validation', function () {
+    const validationResult = validateAlterationPackageRequest({
+      alteration_hook_key: alterationHookKey,
+      data: validAlterationData,
+      policy: undefined,
+      policyholder: undefined,
+    });
+    expect(validationResult.error).to.equal(null);
+  });
 
-//   it('invalid pet name should generate validation error', function () {
-//     const validationResult = validateAlterationPackageRequest({
-//       alteration_hook_key: alterationHookKey,
-//       data: invalidAlterationData,
-//       policy: undefined,
-//       policyholder: undefined,
-//     });
-//     expect(validationResult.error.message).to.equal(
-//       `<COPY JOI ERROR MESSAGE HERE>`,
-//     );
-//   });
+  it('invalid pet name should generate validation error', function () {
+    const validationResult = validateAlterationPackageRequest({
+      alteration_hook_key: alterationHookKey,
+      data: invalidAlterationData,
+      policy: undefined,
+      policyholder: undefined,
+    });
+    expect(validationResult.error.message).to.not.equal(null);
+  });
 
-//   it('should update the <PROPERTY> to "<PROPERTY>"', function () {
-//     const alterationPackage = getAlteration({
-//       alteration_hook_key: alterationHookKey,
-//       data: validAlterationData,
-//       // @ts-ignore
-//       policy: examplePolicy,
-//       policyholder: undefined,
-//     });
-//     expect(alterationPackage.module.SOME_PROPERTY).to.equal('<SOME PROPERTY>');
-//   });
-// });
+  it('20-year-old T-Rex with R90000 cover changed to R75000 resulting premium R1215', function () {
+    const alterationPackage = getAlteration({
+      alteration_hook_key: alterationHookKey,
+      data: trexAlterationData,
+      // @ts-ignore
+      policy: trexExamplePolicy,
+      policyholder: undefined,
+    });
+
+    const alteredPolicy = applyAlteration({
+      alteration_hook_key: alterationHookKey,
+      policy: trexExamplePolicy,
+      policyholder: undefined,
+      alteration_package: alterationPackage,
+    });
+
+    expect(alteredPolicy.module.cover_amount).to.equal(7500000);
+    expect(alteredPolicy.monthly_premium).to.equal(121500);
+  });
+
+  it('36-year-old Velociraptor with R50000 cover changed to R75000 resulting R2052', function () {
+    const alterationPackage = getAlteration({
+      alteration_hook_key: alterationHookKey,
+      data: vraptorAlterationData,
+      // @ts-ignore
+      policy: vraptorExamplePolicy,
+      policyholder: undefined,
+    });
+
+    const alteredPolicy = applyAlteration({
+      alteration_hook_key: alterationHookKey,
+      policy: vraptorExamplePolicy,
+      policyholder: undefined,
+      alteration_package: alterationPackage,
+    });
+
+    expect(alteredPolicy.module.cover_amount).to.equal(7500000);
+    expect(alteredPolicy.monthly_premium).to.equal(205200);
+  });
+});
