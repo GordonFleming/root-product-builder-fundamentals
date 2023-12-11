@@ -42,6 +42,18 @@ describe('applyAnnualIncrease schedule function', () => {
       // @ts-ignore
       policy: validPolicy,
     });
-    expect(result).to.equal(null);
+
+    // Since function only runs on 1st of January, this should increase cover
+    expect(result).to.deep.equal([
+      {
+        name: 'update_policy',
+        data: {
+          // R1620 in cents, since premium was originally R1458
+          monthlyPremium: 162000,
+          // R100 000 in cents, since cover was originally R90 000
+          sumAssured: 10000000,
+        },
+      },
+    ]);
   });
 });
