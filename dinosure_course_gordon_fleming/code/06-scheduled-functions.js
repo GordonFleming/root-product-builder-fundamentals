@@ -9,16 +9,15 @@
 const applyAnnualIncrease = ({ policy, policyholder }) => {
   // Check if the policy is older than a year
   const policyStartDate = moment(policy.start_date);
-  const today = policy.module.today ?? moment();
+  const today = moment();
   const policyAge = today.diff(policyStartDate, 'years');
 
   // Check for older than a year and 1st of January
-  if (policyAge >= 1 && today.month() === 0 && today.date() === 1) {
+  if (policyAge >= 1 && policyStartDate.format('MM-DD') === '01-01') {
     // Increase the cover by R10 000
     const newCover = policy.sum_assured + 10000 * 100;
 
     // Update the cover amount to have the new premium calculated
-    policy.sum_assured = newCover;
     policy.module.cover_amount = newCover;
     const newPremium = corePremiumCalc(policy.module);
 

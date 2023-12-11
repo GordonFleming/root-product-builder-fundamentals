@@ -16,16 +16,10 @@ describe('applyAnnualIncrease schedule function', () => {
       .subtract(1, 'year')
       .toISOString();
 
-    // Pass fake today's date in policy to check first January
-    validPolicy.module.today = moment('2023-01-01');
-
     const result = applyAnnualIncrease({
       // @ts-ignore
       policy: validPolicy,
     });
-
-    // Reset to real today's date for other tests
-    validPolicy.module.today = moment();
 
     expect(result).to.deep.equal([
       {
