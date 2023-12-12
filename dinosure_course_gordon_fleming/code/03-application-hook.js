@@ -57,3 +57,13 @@ const getApplication = (data, policyholder, quote_package) => {
   });
   return application;
 };
+
+const applicationSchema = Joi.object().keys({
+  dinosaur_name: Joi.string().max(100).required(),
+  dinosaur_colour: Joi.string()
+    .valid('Lilac', 'Sea green', 'Granite grey', 'Midnight blue')
+    .required(),
+  ndrn: Joi.string()
+    .regex(/^[1-9][0-9]{5}$/)
+    .required(),
+});
