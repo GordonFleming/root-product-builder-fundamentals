@@ -141,7 +141,20 @@
       "name": "Update Cover Amount"
     }
   ],
-  "scheduledFunctions": [],
+  "scheduledFunctions": [
+    {
+      "functionName": "applyAnnualIncrease",
+      "policyStatuses": [
+        "active"
+      ],
+      "frequency": {
+        "type": "yearly",
+        "dayOfMonth": 1,
+        "monthOfYear": "january",
+        "timeOfDay": "02:00"
+      }
+    }
+  ],
   "fulfillmentTypes": [
     {
       "key": "extraction",
