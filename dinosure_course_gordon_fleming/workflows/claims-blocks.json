@@ -1,23 +1,5 @@
 [
   {
-    "show_if": "{{if if(dateDifference dateNow  claim.policy.start_date measurement='days')) '<' 30) '&&' if(claim.block_states.claim_type.option_value === 'illness')}}",
-    "block": {
-      "key": "illness_waiting_period",
-      "type": "alert",
-      "markdown": "Warning: 1 month waiting period from the policy start date.",
-      "color": "warning"
-    }
-  },
-  {
-    "show_if": "{{if if(dateDifference dateNow claim.policy.start_date measurement='days') '<' 90) '&&' if(claim.block_states.claim_type.option_value === 'death')}}",
-    "block": {
-      "key": "death_waiting_period",
-      "type": "alert",
-      "markdown": "Warning: 3 month waiting period from policy start date.",
-      "color": "warning"
-    }
-  },
-  {
     "block": {
       "key": "incident_heading",
       "type": "heading",
@@ -59,7 +41,7 @@
     }
   },
   {
-    "show_if": "{{if if(dateDifference claim.block_states.reported_date.value claim.block_states.incident_date.value measurement='days') '>' 60}}",
+    "show_if": "{{ifCondition (dateDifference claim.block_states.reported_date.value claim.block_states.incident_date.value measurement='days') '>' 60}}",
     "block": {
       "key": "date_warning_past",
       "type": "alert",
@@ -68,7 +50,7 @@
     }
   },
   {
-    "show_if": "{{if if(dateDifference claim.block_states.incident_date.value claim.policy.start_date measurement='days') '<' 30}}",
+    "show_if": "{{if (if (dateDifference claim.block_states.incident_date.value claim.policy.start_date measurement='days') '<' 30) '&&' (if claim.block_states.claim_type.option_value '===' 'illness')}}",
     "block": {
       "key": "date_warning_illness",
       "type": "alert",
@@ -77,7 +59,7 @@
     }
   },
   {
-    "show_if": "{{if if(dateDifference claim.incident_date claim.policy.start_date measurement='days') '<' 90}}",
+    "show_if": "{{if (if (dateDifference claim.incident_date claim.policy.start_date measurement='days') '<' 90) '&&' (if claim.block_states.claim_type.option_value '===' 'death')}}",
     "block": {
       "key": "date_warning_death",
       "type": "alert",
@@ -204,7 +186,7 @@
     }
   },
   {
-    "disabled_if": "{{if (if claim.approval_status === 'approved') '||' (if claim.approval_status === 'goodwill') }}",
+    "disabled_if": "{{if (if claim.approval_status '===' 'approved') '||' (if claim.approval_status '===' 'goodwill') }}",
     "block": {
       "type": "payout_request",
       "key": "payout_block",
