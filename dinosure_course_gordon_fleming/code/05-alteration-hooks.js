@@ -111,3 +111,11 @@ const applyAlteration = ({
       throw new Error(`Invalid alteration hook key "${alteration_hook_key}"`);
   }
 };
+
+const updateCoverSchema = Joi.object().keys({
+  cover_amount: Joi.number()
+    .integer()
+    .min(10000 * 100)
+    .max(100000 * 100)
+    .required(),
+});

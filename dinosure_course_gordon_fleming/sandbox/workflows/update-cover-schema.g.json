@@ -1,0 +1,27 @@
+[
+  {
+    "key": "cover_amount",
+    "type": "number",
+    "label": "Cover amount",
+    "validators": [
+      {
+        "validation": {
+          "type": "greaterThanNumber",
+          "min": 1000000
+        }
+      },
+      {
+        "validation": {
+          "type": "lessThanNumber",
+          "max": 10000000
+        }
+      },
+      {
+        "validation": {
+          "type": "required"
+        }
+      }
+    ],
+    "outputPath": "cover_amount"
+  }
+]
