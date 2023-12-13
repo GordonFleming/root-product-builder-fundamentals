@@ -63,7 +63,7 @@
     "block": {
       "key": "date_warning_death",
       "type": "alert",
-      "markdown": "Warning: Claim for death must be outside of the waiting period of 1 month.",
+      "markdown": "Warning: Claim for death must be outside of the waiting period of 3 months.",
       "color": "danger"
     }
   },
@@ -186,7 +186,7 @@
     }
   },
   {
-    "disabled_if": "{{if (if claim.approval_status '===' 'approved') '||' (if claim.approval_status '===' 'goodwill') }}",
+    "disabled_if": "{{if (if claim.approval_status '!==' 'approved') '||' (if claim.approval_status '!==' 'goodwill') }}",
     "block": {
       "type": "payout_request",
       "key": "payout_block",
