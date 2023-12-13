@@ -1,5 +1,23 @@
 [
   {
+    "show_if": "{{if if(moment().diff(moment(claim.policy.start_date), 'days') '<' 30) '&&' if(claim.block_states.claim_type.option_value === 'illness')}}",
+    "block": {
+      "key": "illness_waiting_period",
+      "type": "alert",
+      "markdown": "Warning: 1 month waiting period from the policy start date.",
+      "color": "warning"
+    }
+  },
+  {
+    "show_if": "{{if if(moment().diff(moment(claim.policy.start_date), 'days') '<' 90) '&&' if(claim.block_states.claim_type.option_value === 'death')}}",
+    "block": {
+      "key": "death_waiting_period",
+      "type": "alert",
+      "markdown": "Warning: 3 month waiting period from policy start date.",
+      "color": "warning"
+    }
+  },
+  {
     "block": {
       "key": "incident_heading",
       "type": "heading",
@@ -186,6 +204,7 @@
     }
   },
   {
+    "disabled_if": "{{if (if claim.approval_status === 'approved') '||' (if claim.approval_status === 'goodwill') }}",
     "block": {
       "type": "payout_request",
       "key": "payout_block",
