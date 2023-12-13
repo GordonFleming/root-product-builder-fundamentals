@@ -41,7 +41,7 @@
     }
   },
   {
-    "show_if": "{{ifCondition moment(claim.reported_date).diff(moment(claim.incident_date), 'days') '>' 60}}",
+    "show_if": "{{ifCondition moment(claim.block_states.reported_date.value).diff(moment(claim.block_states.incident_date.value), 'days') '>' 60}}",
     "block": {
       "key": "date_warning_past",
       "type": "alert",
@@ -50,7 +50,7 @@
     }
   },
   {
-    "show_if": "{{ifCondition moment(claim.incident_date).diff(moment(claim.policy.start_date), 'days') '<' 30}}",
+    "show_if": "{{ifCondition moment(claim.block_states.incident_date.value).diff(moment(claim.policy.start_date), 'days') '<' 30}}",
     "block": {
       "key": "date_warning_illness",
       "type": "alert",
@@ -183,6 +183,31 @@
       "type": "input.number",
       "title": "Account Number",
       "placeholder": 123456789
+    }
+  },
+  {
+    "block": {
+      "type": "payout_request",
+      "key": "payout_block",
+      "title": "Dinosaur Payout Block",
+      "amount": "{{ claim.policy.sum_assured }}",
+      "description": "Payout for the injured or deceased dinosaur",
+      "payee": {
+        "type": "policyholder",
+        "first_name": "{{ claim.policy.beneficiaries.0.first_name }}",
+        "last_name": "{{ claim.policy.beneficiaries.0.last_name }}",
+        "amount": "{{ claim.policy.sum_assured }}",
+        "percentage": "100",
+        "payment_details": {
+          "type": "eft",
+          "details": {
+            "bank_name": "{{ claim.block_states.bank_name.value }}",
+            "branch_code": "{{ claim.block_states.bank_code.value }}",
+            "account_type": "{{ claim.block_states.account_type.value }}",
+            "account_number": "{{ claim.block_states.account_number.value }}"
+          }
+        }
+      }
     }
   }
 ]
