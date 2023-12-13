@@ -1,6 +1,6 @@
 [
   {
-    "show_if": "{{if if(moment().diff(moment(claim.policy.start_date), 'days') '<' 30) '&&' if(claim.block_states.claim_type.option_value === 'illness')}}",
+    "show_if": "{{if if(dateDifference dateNow  claim.policy.start_date measurement='days')) '<' 30) '&&' if(claim.block_states.claim_type.option_value === 'illness')}}",
     "block": {
       "key": "illness_waiting_period",
       "type": "alert",
@@ -9,7 +9,7 @@
     }
   },
   {
-    "show_if": "{{if if(moment().diff(moment(claim.policy.start_date), 'days') '<' 90) '&&' if(claim.block_states.claim_type.option_value === 'death')}}",
+    "show_if": "{{if if(dateDifference dateNow claim.policy.start_date measurement='days') '<' 90) '&&' if(claim.block_states.claim_type.option_value === 'death')}}",
     "block": {
       "key": "death_waiting_period",
       "type": "alert",
@@ -46,7 +46,7 @@
       "key": "incident_date",
       "type": "input.date",
       "title": "Date of incident",
-      "placeholder": "{{ dateNow }}"
+      "placeholder": "{{ dateNow format='YYYY-MM-DD' }}"
     }
   },
   {
@@ -54,12 +54,12 @@
       "key": "reported_date",
       "type": "input.date",
       "title": "Date Reported",
-      "default_value": "{{ dateNow }}",
-      "placeholder": "{{ dateNow }}"
+      "default_value": "{{ dateNow format='YYYY-MM-DD'  }}",
+      "placeholder": "{{ dateNow format='YYYY-MM-DD' }}"
     }
   },
   {
-    "show_if": "{{ifCondition moment(claim.block_states.reported_date.value).diff(moment(claim.block_states.incident_date.value), 'days') '>' 60}}",
+    "show_if": "{{if if(dateDifference claim.block_states.reported_date.value claim.block_states.incident_date.value measurement='days') '>' 60}}",
     "block": {
       "key": "date_warning_past",
       "type": "alert",
@@ -68,7 +68,7 @@
     }
   },
   {
-    "show_if": "{{ifCondition moment(claim.block_states.incident_date.value).diff(moment(claim.policy.start_date), 'days') '<' 30}}",
+    "show_if": "{{if if(dateDifference claim.block_states.incident_date.value claim.policy.start_date measurement='days') '<' 30}}",
     "block": {
       "key": "date_warning_illness",
       "type": "alert",
@@ -77,7 +77,7 @@
     }
   },
   {
-    "show_if": "{{ifCondition moment(claim.incident_date).diff(moment(claim.policy.start_date), 'days') '<' 90}}",
+    "show_if": "{{if if(dateDifference claim.incident_date claim.policy.start_date measurement='days') '<' 90}}",
     "block": {
       "key": "date_warning_death",
       "type": "alert",
