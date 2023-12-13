@@ -1,7 +1,7 @@
 [
   {
     "block": {
-      "key": "incident_description",
+      "key": "incident_heading",
       "type": "heading",
       "title": "Incident description"
     }
@@ -69,18 +69,18 @@
   },
   {
     "block": {
-        "key": "incident_description",
-        "type": "input.paragraph",
-        "title": "Description of incident",
-        "placeholder": "On the date of the incident, the following occurred...",
-        "max_length": 500,
-        "min_length": 150
+      "key": "incident_description",
+      "type": "input.paragraph",
+      "title": "Description of incident",
+      "placeholder": "On the date of the incident, the following occurred...",
+      "max_length": 500,
+      "min_length": 150
     }
   },
   {
     "block": {
-        "key": "claim_type_divider",
-        "type": "divider"
+      "key": "claim_type_divider",
+      "type": "divider"
     }
   },
   {
@@ -89,5 +89,5 @@
       "type": "heading",
       "title": "Payment details"
     }
-  },
+  }
 ]
