@@ -89,5 +89,100 @@
       "type": "heading",
       "title": "Payment details"
     }
+  },
+  {
+    "block": {
+      "key": "bank_name",
+      "type": "dropdown",
+      "title": "Bank Name",
+      "options": [
+        {
+          "key": "absa",
+          "value": "ABSA"
+        },
+        {
+          "key": "african_bank",
+          "value": "African Bank"
+        },
+        {
+          "key": "bidvest",
+          "value": "Bidvest"
+        },
+        {
+          "key": "capitec",
+          "value": "Capitec"
+        },
+        {
+          "key": "discovery_bank",
+          "value": "Discovery Bank"
+        },
+        {
+          "key": "fnb",
+          "value": "FNB"
+        },
+        {
+          "key": "investec",
+          "value": "Investec"
+        },
+        {
+          "key": "ithala",
+          "value": "Ithala"
+        },
+        {
+          "key": "nedbank",
+          "value": "Nedbank"
+        },
+        {
+          "key": "old_mutual",
+          "value": "Old Mutual"
+        },
+        {
+          "key": "postbank",
+          "value": "Postbank"
+        },
+        {
+          "key": "standard_bank",
+          "value": "Standard Bank"
+        },
+        {
+          "key": "tyme_bank",
+          "value": "Tyme Bank"
+        }
+      ],
+      "default_value": "FNB"
+    }
+  },
+  {
+    "block": {
+      "key": "bank_code",
+      "type": "input.number",
+      "title": "Branch Code",
+      "placeholder": 632005
+    }
+  },
+  {
+    "block": {
+      "key": "account_type",
+      "type": "dropdown",
+      "title": "Account Type",
+      "options": [
+        {
+          "key": "savings_account",
+          "value": "Savings Account"
+        },
+        {
+          "key": "cheque_account",
+          "value": "Cheque Account"
+        }
+      ]
+    }
+  },
+  {
+    "block": {
+      "key": "account_number",
+      "type": "input.number",
+      "title": "Account Number",
+      "placeholder": 123456789
+    }
   }
 ]

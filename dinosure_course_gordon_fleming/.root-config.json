@@ -100,8 +100,9 @@
         "Are all the premiums up to date upon the claim reported date?"
       ],
       "documentLabels": [
-        "Dinosaur Claim form ( Mandatory)",
-        "Proof of Payment ( Mandatory)"
+        "Dinosaur Claim form (Mandatory)",
+        "Proof of Payment (Mandatory)",
+        "NDR Form (Mandatory)"
       ]
     },
     "billing": {
