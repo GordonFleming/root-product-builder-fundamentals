@@ -14,11 +14,11 @@
       "options": [
         {
           "key": "illness",
-          "value": "No"
+          "value": "Illness"
         },
         {
           "key": "death",
-          "value": "No"
+          "value": "Death"
         }
       ]
     }
