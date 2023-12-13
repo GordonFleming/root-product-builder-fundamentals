@@ -50,7 +50,7 @@
     }
   },
   {
-    "show_if": "{{if (if (dateDifference claim.block_states.incident_date.value claim.policy.start_date measurement='days') '<' 30) '&&' (if claim.block_states.claim_type.option_value '===' 'illness')}}",
+    "show_if": "{{if (if (dateDifference claim.block_states.incident_date.value claim.policy.start_date measurement='days') '<' 30) '&&' (if claim.block_states.claim_type.option_value '===' 'Illness')}}",
     "block": {
       "key": "date_warning_illness",
       "type": "alert",
@@ -59,7 +59,7 @@
     }
   },
   {
-    "show_if": "{{if (if (dateDifference claim.incident_date claim.policy.start_date measurement='days') '<' 90) '&&' (if claim.block_states.claim_type.option_value '===' 'death')}}",
+    "show_if": "{{if (if (dateDifference claim.incident_date claim.policy.start_date measurement='days') '<' 90) '&&' (if claim.block_states.claim_type.option_value '===' 'Death')}}",
     "block": {
       "key": "date_warning_death",
       "type": "alert",
