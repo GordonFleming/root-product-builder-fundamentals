@@ -1,232 +1,213 @@
 [
   {
     "block": {
-      "key": "waiting_period_alert",
-      "type": "alert",
-      "color": "warning",
-      "markdown": "Date of treatment is within the waiting period."
-    },
-    "show_if": "{{ifCondition (dateDifference claim.block_states.date_of_treatment.value claim.policy.start_date measurement='days') '<' 90}}"
-  },
-  {
-    "block": {
-      "key": "claim_details_heading",
-      "type": "markdown",
-      "markdown": "### Claim details"
+      "key": "incident_heading",
+      "type": "heading",
+      "title": "Incident description"
     }
   },
   {
     "block": {
+      "type": "radio",
       "key": "claim_type",
-      "type": "dropdown",
-      "title": "Event type",
+      "title": "Claim type",
       "options": [
-        {
-          "key": "accident",
-          "value": "Accident"
-        },
         {
           "key": "illness",
           "value": "Illness"
         },
         {
-          "key": "checkup",
-          "value": "Check-up"
+          "key": "death",
+          "value": "Death"
         }
       ]
     }
   },
   {
     "block": {
-      "key": "accident_event",
-      "type": "input.paragraph",
-      "title": "Description of accident"
-    },
-    "show_if": "{{ifCondition claim.block_states.claim_type.option_key '===' 'accident'}}"
-  },
-  {
-    "block": {
-      "key": "date_of_first_clinical_signs",
+      "key": "incident_date",
       "type": "input.date",
-      "title": "Date first showed clinical signs"
-    },
-    "show_if": "{{ifCondition claim.block_states.claim_type.option_key '===' 'illness'}}"
+      "title": "Date of incident",
+      "placeholder": "{{ dateNow format='YYYY-MM-DD' }}"
+    }
   },
   {
     "block": {
-      "key": "medical_diagnosis",
-      "type": "input.text",
-      "title": "Medical diagnosis"
-    },
-    "show_if": "{{ifCondition claim.block_states.claim_type.option_key '===' 'illness'}}"
-  },
-  {
-    "block": {
-      "key": "condition_continuation",
-      "type": "radio",
-      "title": "Is this a continuation of a condition that existed before the treatment date?",
-      "options": [
-        {
-          "key": "no",
-          "value": "No"
-        },
-        {
-          "key": "yes",
-          "value": "Yes"
-        }
-      ],
-      "default_value": "No"
-    },
-    "show_if": "{{ifCondition claim.block_states.claim_type.option_key '===' 'illness'}}"
-  },
-  {
-    "block": {
-      "key": "hereditary_condition",
-      "type": "radio",
-      "title": "Is this a hereditary condition?",
-      "options": [
-        {
-          "key": "no",
-          "value": "No"
-        },
-        {
-          "key": "yes",
-          "value": "Yes"
-        }
-      ],
-      "default_value": "No"
-    },
-    "show_if": "{{ifCondition claim.block_states.claim_type.option_key '===' 'illness'}}"
-  },
-  {
-    "block": {
-      "key": "congenital_condition",
-      "type": "radio",
-      "title": "Is this a congenital condition?",
-      "options": [
-        {
-          "key": "no",
-          "value": "No"
-        },
-        {
-          "key": "yes",
-          "value": "Yes"
-        }
-      ],
-      "default_value": "No"
-    },
-    "show_if": "{{ifCondition claim.block_states.claim_type.option_key '===' 'illness'}}"
-  },
-  {
-    "block": {
-      "key": "chronic_treatment",
-      "type": "radio",
-      "title": "Is the treatment chronic?",
-      "options": [
-        {
-          "key": "no",
-          "value": "No"
-        },
-        {
-          "key": "yes",
-          "value": "Yes"
-        }
-      ],
-      "default_value": "No"
-    },
-    "show_if": "{{ifCondition (ifCondition claim.block_states.claim_type.option_key '===' 'accident') '||' (ifCondition claim.block_states.claim_type.option_key '===' 'illness')}}"
-  },
-  {
-    "block": {
-      "key": "date_of_treatment",
+      "key": "reported_date",
       "type": "input.date",
-      "title": "Date of first treatment"
+      "title": "Date Reported",
+      "default_value": "{{ dateNow format='YYYY-MM-DD'  }}",
+      "placeholder": "{{ dateNow format='YYYY-MM-DD' }}"
+    }
+  },
+  {
+    "show_if": "{{ifCondition (dateDifference claim.block_states.reported_date.value claim.block_states.incident_date.value measurement='days') '>' 60}}",
+    "block": {
+      "key": "date_warning_past",
+      "type": "alert",
+      "markdown": "Warning: Claims must be logged within 60 days of the incident occurring.",
+      "color": "danger"
+    }
+  },
+  {
+    "show_if": "{{if (if (dateDifference claim.block_states.incident_date.value claim.policy.start_date measurement='days') '<' 30) '&&' (if claim.block_states.claim_type.option_value '===' 'Illness')}}",
+    "block": {
+      "key": "date_warning_illness",
+      "type": "alert",
+      "markdown": "Warning: Claim for illness must be outside of the waiting period of 1 month.",
+      "color": "danger"
+    }
+  },
+  {
+    "show_if": "{{if (if (dateDifference claim.incident_date claim.policy.start_date measurement='days') '<' 90) '&&' (if claim.block_states.claim_type.option_value '===' 'Death')}}",
+    "block": {
+      "key": "date_warning_death",
+      "type": "alert",
+      "markdown": "Warning: Claim for death must be outside of the waiting period of 3 months.",
+      "color": "danger"
     }
   },
   {
     "block": {
-      "key": "practice_name",
-      "type": "input.text",
-      "title": "Practice name"
-    }
-  },
-  {
-    "block": {
-      "key": "pet_admitted_at_practice",
-      "type": "radio",
-      "title": "Was the pet admitted at the practice?",
-      "options": [
-        {
-          "key": "no",
-          "value": "No"
-        },
-        {
-          "key": "yes",
-          "value": "Yes"
-        }
-      ],
-      "default_value": "No"
-    },
-    "show_if": "{{ifCondition (ifCondition claim.block_states.claim_type.option_key '===' 'accident') '||' (ifCondition claim.block_states.claim_type.option_key '===' 'illness')}}"
-  },
-  {
-    "block": {
-      "key": "additional_notes",
+      "key": "incident_description",
       "type": "input.paragraph",
-      "title": "Additional vet notes"
+      "title": "Description of incident",
+      "placeholder": "On the date of the incident, the following occurred...",
+      "max_length": 500,
+      "min_length": 150
     }
   },
   {
     "block": {
-      "key": "claim_payout_divider",
+      "key": "claim_type_divider",
       "type": "divider"
     }
   },
   {
     "block": {
-      "key": "payout_details",
-      "type": "markdown",
-      "markdown": "### Payout details"
+      "key": "payment_details",
+      "type": "heading",
+      "title": "Payment details"
     }
   },
   {
     "block": {
-      "key": "payout_amount",
-      "max": 3000000,
-      "type": "input.currency",
-      "title": "Payout amount",
-      "isoCode": "ZAR"
+      "key": "bank_name",
+      "type": "dropdown",
+      "title": "Bank Name",
+      "options": [
+        {
+          "key": "absa",
+          "value": "ABSA"
+        },
+        {
+          "key": "african_bank",
+          "value": "African Bank"
+        },
+        {
+          "key": "bidvest",
+          "value": "Bidvest"
+        },
+        {
+          "key": "capitec",
+          "value": "Capitec"
+        },
+        {
+          "key": "discovery_bank",
+          "value": "Discovery Bank"
+        },
+        {
+          "key": "fnb",
+          "value": "FNB"
+        },
+        {
+          "key": "investec",
+          "value": "Investec"
+        },
+        {
+          "key": "ithala",
+          "value": "Ithala"
+        },
+        {
+          "key": "nedbank",
+          "value": "Nedbank"
+        },
+        {
+          "key": "old_mutual",
+          "value": "Old Mutual"
+        },
+        {
+          "key": "postbank",
+          "value": "Postbank"
+        },
+        {
+          "key": "standard_bank",
+          "value": "Standard Bank"
+        },
+        {
+          "key": "tyme_bank",
+          "value": "Tyme Bank"
+        }
+      ],
+      "default_value": "FNB"
     }
   },
   {
     "block": {
-      "key": "claim_payout_request",
+      "key": "bank_code",
+      "type": "input.number",
+      "title": "Branch Code",
+      "placeholder": 632005
+    }
+  },
+  {
+    "block": {
+      "key": "account_type",
+      "type": "dropdown",
+      "title": "Account Type",
+      "options": [
+        {
+          "key": "savings_account",
+          "value": "Savings Account"
+        },
+        {
+          "key": "cheque_account",
+          "value": "Cheque Account"
+        }
+      ]
+    }
+  },
+  {
+    "block": {
+      "key": "account_number",
+      "type": "input.number",
+      "title": "Account Number",
+      "placeholder": 123456789
+    }
+  },
+  {
+    "disabled_if": "{{if (if claim.approval_status '!==' 'approved') '||' (if claim.approval_status '!==' 'goodwill') }}",
+    "block": {
       "type": "payout_request",
+      "key": "payout_block",
+      "title": "Dinosaur Payout Block",
+      "amount": "{{ claim.policy.sum_assured }}",
+      "description": "Payout for the injured or deceased dinosaur",
       "payee": {
         "type": "policyholder",
-        "amount": "{{#ifIsDefined claim.block_states.payout_amount.value}}{{claim.block_states.payout_amount.value}}{{else}}0{{/ifIsDefined}}",
-        "percentage": 100,
+        "policyholder_id": "{{ claim.policy.policyholder_id }}",
+        "amount": "{{ claim.policy.sum_assured }}",
+        "percentage": "100",
         "payment_details": {
           "type": "eft",
           "details": {
-            "bank_name": "{{ claim.policy.beneficiaries.0.payment_details.details.bank_name }}",
-            "branch_code": "{{ claim.policy.beneficiaries.0.payment_details.details.branch_code }}",
-            "account_type": "{{ claim.policy.beneficiaries.0.payment_details.details.account_type }}",
-            "account_number": "{{ claim.policy.beneficiaries.0.payment_details.details.account_number }}"
+            "bank_name": "{{ claim.block_states.bank_name.option_value }}",
+            "branch_code": "{{ claim.block_states.bank_code.value }}",
+            "account_type": "{{ claim.block_states.account_type.value }}",
+            "account_number": "{{ claim.block_states.account_number.value }}"
           }
-        },
-        "policyholder_id": "{{ claim.policy.policyholder_id }}"
-      },
-      "title": "Claim payout",
-      "amount": "{{ claim.block_states.payout_amount.value }}",
-      "description": "Details of payment to be made to policyholder"
-    },
-    "disabled_if": "{{#if claim.approval_status '!==' approved}}"
-  },
-  {
-    "block": {
-      "key": "claim_details_divider",
-      "type": "divider"
+        }
+      }
     }
   }
 ]
